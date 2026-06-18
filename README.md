@@ -408,7 +408,7 @@ That is a fundamentally different — and more valuable — question for student
 ```
 MIT License
 
-Copyright (c) 2024 Career Guardian AI
+Copyright (c) 2026 Darshil Samson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -428,6 +428,9 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ---
 
 <div align="center">
+
+## 👨‍💻 Author
+### Darshil Samson
 
 **Career Guardian AI** — Built for students. Powered by Gemini. Guided by clarity.
 
