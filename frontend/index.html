@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Guardian AI — Career Intelligence</title>
+  <meta name="description" content="AI-powered career intelligence: resume analysis, focus scoring, skill gap detection, and professional growth planning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="13" stroke="#6C63FF" stroke-width="1.5"/>
+            <circle cx="14" cy="14" r="5" fill="#6C63FF" opacity="0.3"/>
+            <circle cx="14" cy="14" r="2.5" fill="#6C63FF"/>
+            <line x1="14" y1="2" x2="14" y2="6" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="22" x2="14" y2="26" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="2" y1="14" x2="6" y2="14" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="22" y1="14" x2="26" y2="14" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="5.5" y1="5.5" x2="8.3" y2="8.3" stroke="#6C63FF" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="19.7" y1="19.7" x2="22.5" y2="22.5" stroke="#6C63FF" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Career Guardian</span>
+          <span class="logo-badge">AI</span>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <span class="nav-tag">Career Intelligence</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── UPLOAD PANEL ── -->
+  <main id="upload-section" class="upload-section">
+    <div class="upload-hero">
+      <div class="hero-eyebrow">AI Career Mentor</div>
+      <h1 class="hero-title">Understand your career<br/><span class="hero-accent">at a glance</span></h1>
+      <p class="hero-sub">Upload your resume and get a deep analysis — career direction, focus score, skill gaps, growth roadmap, and more. No account needed.</p>
+    </div>
+
+    <div class="upload-card" id="drop-zone" role="button" tabindex="0" aria-label="Upload resume PDF">
+      <div class="upload-icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="4" width="32" height="40" rx="4" stroke="#6C63FF" stroke-width="1.5" fill="none"/>
+          <line x1="16" y1="16" x2="32" y2="16" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="16" y1="22" x2="32" y2="22" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="16" y1="28" x2="24" y2="28" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="35" cy="35" r="8" fill="#0D1117" stroke="#6C63FF" stroke-width="1.5"/>
+          <line x1="35" y1="31" x2="35" y2="39" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="31" y1="35" x2="39" y2="35" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="upload-primary">Drop your resume here</p>
+      <p class="upload-secondary">or click to browse</p>
+      <div class="upload-meta">PDF only · Max 10 MB · Text-based PDFs only</div>
+      <input type="file" id="file-input" accept=".pdf,application/pdf" class="file-input-hidden" aria-label="Select PDF file" />
+    </div>
+
+    <div id="file-preview" class="file-preview hidden">
+      <div class="file-icon" aria-hidden="true">📄</div>
+      <div class="file-info">
+        <div class="file-name" id="file-name-display"></div>
+        <div class="file-size" id="file-size-display"></div>
+      </div>
+      <button class="btn-remove" id="remove-file" aria-label="Remove file">✕</button>
+    </div>
+
+    <button class="btn-analyse" id="analyse-btn" disabled aria-label="Analyse resume">
+      <span class="btn-label">Analyse My Resume</span>
+      <span class="btn-arrow">→</span>
+    </button>
+
+    <div id="error-banner" class="error-banner hidden" role="alert" aria-live="polite">
+      <span class="error-icon">⚠</span>
+      <span id="error-message"></span>
+    </div>
+  </main>
+
+  <!-- ── LOADING STATE ── -->
+  <div id="loading-section" class="loading-section hidden" role="status" aria-label="Analysing resume">
+    <div class="loading-card">
+      <div class="loading-orbit" aria-hidden="true">
+        <div class="orbit-ring ring-1"></div>
+        <div class="orbit-ring ring-2"></div>
+        <div class="orbit-dot"></div>
+      </div>
+      <h2 class="loading-title">Analysing your resume</h2>
+      <div class="loading-steps" id="loading-steps">
+        <div class="loading-step active" data-step="0">Extracting resume content</div>
+        <div class="loading-step" data-step="1">Detecting career direction</div>
+        <div class="loading-step" data-step="2">Calculating focus score</div>
+        <div class="loading-step" data-step="3">Mapping skill gaps</div>
+        <div class="loading-step" data-step="4">Building growth roadmap</div>
+      </div>
+      <div class="loading-timer">This usually takes 10–20 seconds</div>
+    </div>
+  </div>
+
+  <!-- ── RESULTS DASHBOARD ── -->
+  <div id="results-section" class="results-section hidden">
+
+    <!-- Dashboard Header -->
+    <div class="dash-header">
+      <div class="dash-header-inner">
+        <div>
+          <h2 class="dash-title">Career Intelligence Report</h2>
+          <p class="dash-subtitle" id="dash-candidate-name">—</p>
+        </div>
+        <button class="btn-reanalyse" id="reanalyse-btn">← Analyse another resume</button>
+      </div>
+    </div>
+
+    <div class="dashboard">
+
+      <!-- ── ROW 1: FLAGSHIP — Focus Score (full width) ── -->
+      <section class="focus-hero-section" aria-label="Focus Score">
+        <div class="focus-hero-card">
+          <div class="focus-hero-left">
+            <div class="section-eyebrow">Flagship Feature</div>
+            <h3 class="focus-hero-title">Resume Focus Score</h3>
+            <p class="focus-hero-desc" id="focus-reasoning"></p>
+
+            <div class="focus-breakdown">
+              <div class="breakdown-item">
+                <span class="breakdown-label">Skill alignment</span>
+                <div class="breakdown-bar-wrap">
+                  <div class="breakdown-bar" id="bar-skill-align"></div>
+                </div>
+                <span class="breakdown-val" id="val-skill-align">—</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Project alignment</span>
+                <div class="breakdown-bar-wrap">
+                  <div class="breakdown-bar" id="bar-project-align"></div>
+                </div>
+                <span class="breakdown-val" id="val-project-align">—</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Cert alignment</span>
+                <div class="breakdown-bar-wrap">
+                  <div class="breakdown-bar" id="bar-cert-align"></div>
+                </div>
+                <span class="breakdown-val" id="val-cert-align">—</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Experience alignment</span>
+                <div class="breakdown-bar-wrap">
+                  <div class="breakdown-bar" id="bar-exp-align"></div>
+                </div>
+                <span class="breakdown-val" id="val-exp-align">—</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Resume consistency</span>
+                <div class="breakdown-bar-wrap">
+                  <div class="breakdown-bar" id="bar-consistency"></div>
+                </div>
+                <span class="breakdown-val" id="val-consistency">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="focus-hero-right">
+            <div class="focus-dial-wrap">
+              <svg class="focus-dial" viewBox="0 0 200 200" aria-label="Focus score dial">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#1e2530" stroke-width="16"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#6C63FF" stroke-width="16"
+                  stroke-linecap="round" stroke-dasharray="502" stroke-dashoffset="502"
+                  id="focus-dial-circle" class="dial-progress"
+                  transform="rotate(-90 100 100)"/>
+                <text x="100" y="90" text-anchor="middle" class="dial-score" id="dial-score-text">—</text>
+                <text x="100" y="118" text-anchor="middle" class="dial-label" id="dial-category-text">—</text>
+              </svg>
+            </div>
+
+            <div class="focus-sw-grid">
+              <div class="focus-sw-col strengths">
+                <div class="sw-header">Strengths</div>
+                <ul class="sw-list" id="focus-strengths"></ul>
+              </div>
+              <div class="focus-sw-col weaknesses">
+                <div class="sw-header">Weaknesses</div>
+                <ul class="sw-list" id="focus-weaknesses"></ul>
+              </div>
+            </div>
+
+            <div class="focus-recs">
+              <div class="recs-header">Recommendations</div>
+              <ul class="recs-list" id="focus-recs"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ROW 2: Career Direction + Resume Rating ── -->
+      <div class="grid-2">
+
+        <!-- Career Direction -->
+        <section class="card" aria-label="Career Direction">
+          <div class="card-eyebrow">Analysis</div>
+          <h3 class="card-title">Career Direction</h3>
+          <div class="career-direction">
+            <div class="career-primary">
+              <div class="career-role-label">Primary direction</div>
+              <div class="career-role-name" id="career-primary">—</div>
+              <div class="confidence-wrap">
+                <div class="confidence-bar-outer">
+                  <div class="confidence-bar-inner" id="confidence-bar"></div>
+                </div>
+                <span class="confidence-pct" id="confidence-pct">—%</span>
+              </div>
+            </div>
+            <div class="career-secondary">
+              <div class="career-role-label">Secondary direction</div>
+              <div class="career-role-name career-role-secondary" id="career-secondary">—</div>
+            </div>
+            <div class="career-reasoning" id="career-reasoning"></div>
+          </div>
+        </section>
+
+        <!-- Resume Rating -->
+        <section class="card" aria-label="Resume Rating">
+          <div class="card-eyebrow">Evaluation</div>
+          <h3 class="card-title">Resume Rating</h3>
+          <div class="resume-rating">
+            <div class="overall-score-row">
+              <div class="overall-score-num" id="overall-score">—</div>
+              <div class="overall-score-label">Overall score</div>
+            </div>
+            <div class="subscores" id="subscores-grid"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── ROW 3: Skill Gap (full width) ── -->
+      <section class="card skill-gap-card" aria-label="Skill Gap Analysis">
+        <div class="card-eyebrow">Gap Detection</div>
+        <h3 class="card-title">Skill Gap Analysis <span class="card-title-role" id="skill-gap-role"></span></h3>
+        <div class="skill-gap-grid" id="skill-gap-grid"></div>
+      </section>
+
+      <!-- ── ROW 4: Resume Intelligence ── -->
+      <section class="card" aria-label="Resume Intelligence">
+        <div class="card-eyebrow">Extraction</div>
+        <h3 class="card-title">Resume Intelligence</h3>
+        <div class="intel-grid" id="intel-grid"></div>
+      </section>
+
+      <!-- ── ROW 5: Growth Roadmap (full width) ── -->
+      <section class="card roadmap-card" aria-label="Growth Roadmap">
+        <div class="card-eyebrow">Planning</div>
+        <h3 class="card-title">Personalised Growth Roadmap</h3>
+        <div class="roadmap-phases">
+          <div class="roadmap-phase">
+            <div class="phase-badge phase-30">30 days</div>
+            <ul class="phase-steps" id="roadmap-30"></ul>
+          </div>
+          <div class="roadmap-phase">
+            <div class="phase-badge phase-60">60 days</div>
+            <ul class="phase-steps" id="roadmap-60"></ul>
+          </div>
+          <div class="roadmap-phase">
+            <div class="phase-badge phase-90">90 days</div>
+            <ul class="phase-steps" id="roadmap-90"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ROW 6: Certifications + Projects ── -->
+      <div class="grid-2">
+
+        <!-- Certifications -->
+        <section class="card" aria-label="Certification Advisor">
+          <div class="card-eyebrow">Growth</div>
+          <h3 class="card-title">Certification Advisor</h3>
+          <div class="cert-list" id="cert-list"></div>
+        </section>
+
+        <!-- Projects -->
+        <section class="card" aria-label="Project Recommendations">
+          <div class="card-eyebrow">Portfolio</div>
+          <h3 class="card-title">Project Recommendations</h3>
+          <div class="project-list" id="project-list"></div>
+        </section>
+      </div>
+
+      <!-- ── ROW 7: Opportunity Guide ── -->
+      <section class="card" aria-label="Opportunity Guide">
+        <div class="card-eyebrow">Discovery</div>
+        <h3 class="card-title">Opportunity Guide</h3>
+        <div class="opportunity-grid" id="opportunity-grid"></div>
+      </section>
+
+    </div><!-- /dashboard -->
+  </div><!-- /results-section -->
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Career Guardian AI</span>
+      <span class="footer-sep">·</span>
+      <span>Built with Google Gemini</span>
+      <span class="footer-sep">·</span>
+      <span>No data stored · No account required</span>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
