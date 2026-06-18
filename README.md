@@ -427,8 +427,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ---
 
-## 👨‍💻 Author
-### Darshil Samson
+### Build By Darshil Samson
 
 <div align="center">
 
