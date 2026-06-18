@@ -427,10 +427,10 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ---
 
-<div align="center">
-
 ## 👨‍💻 Author
 ### Darshil Samson
+
+<div align="center">
 
 **Career Guardian AI** — Built for students. Powered by Gemini. Guided by clarity.
 
