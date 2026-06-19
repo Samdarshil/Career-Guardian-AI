@@ -85,17 +85,9 @@ Structured extraction of name, email, education, skills, projects, experience, c
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Demo Run
 
-> *Screenshots will be added after first deployment.*
-
-| Upload Screen | Focus Score Dashboard |
-|---|---|
-| `[Screenshot Placeholder]` | `[Screenshot Placeholder]` |
-
-| Skill Gap Analysis | Growth Roadmap |
-|---|---|
-| `[Screenshot Placeholder]` | `[Screenshot Placeholder]` |
+https://drive.google.com/file/d/1_y0Lf2-bbn2IldIaJDeMhouUzWDjrurP/view?usp=drivesdk
 
 ---
 
