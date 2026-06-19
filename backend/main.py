@@ -1,7 +1,8 @@
 """
 Career Guardian AI — FastAPI Application Entry Point
 """
-
+from dotenv import load_dotenv
+load_dotenv()
 import os
 from pathlib import Path
 
@@ -11,10 +12,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+
 # Load .env before anything else
 load_dotenv()
 
-from backend.routes.analysis import router as analysis_router
+from routes.analysis import router as analysis_router
 
 app = FastAPI(
     title="Career Guardian AI",

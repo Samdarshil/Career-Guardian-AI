@@ -5,9 +5,9 @@ Pydantic validation, and fallback generation.
 
 from fastapi import UploadFile, HTTPException
 
-from backend.services.pdf_service import extract_text_from_pdf, NoPDFTextError
-from backend.services.gemini_service import analyse_resume
-from backend.models.schemas import (
+from services.pdf_service import extract_text_from_pdf, NoPDFTextError
+from services.gemini_service import analyse_resume
+from models.schemas import (
     AnalysisResponse,
     FocusScore,
     get_focus_category,

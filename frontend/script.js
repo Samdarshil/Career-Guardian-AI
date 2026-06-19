@@ -2,7 +2,6 @@
  * Career Guardian AI — Frontend Logic
  * Handles: file upload, drag-drop, API call, dashboard rendering
  */
-
 'use strict';
 
 // ── DOM References ────────────────────────────────────────────
@@ -163,9 +162,9 @@ analyseBtn.addEventListener('click', async () => {
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30000);
+    const timeout = setTimeout(() => controller.abort(), 90000);
 
-    const response = await fetch('/api/analyze', {
+    const response = await fetch('http://127.0.0.1:8000/api/analyze', {
       method: 'POST',
       body: formData,
       signal: controller.signal,
