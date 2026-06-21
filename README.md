@@ -1,6 +1,6 @@
 <div align="center">
 
-    # 🎯 Career Guardian AI
+# 🎯 Career Guardian AI
 
 ### *AI-Powered Career Intelligence — Multi-Agent Resume Analysis*
 
