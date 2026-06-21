@@ -153,7 +153,7 @@ File: `backend/utils/security.py` → `write_audit_log()`
 
 **Live URL:** [https://career-guardian-ai.onrender.com](https://career-guardian-ai.onrender.com)
 
-# render.yaml (committed to repo root)
+## render.yaml (committed to repo root)
 services:
   - type: web
     name: career-guardian-ai
