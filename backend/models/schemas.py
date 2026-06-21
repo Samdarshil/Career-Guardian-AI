@@ -1,9 +1,9 @@
 """
 Pydantic models for Career Guardian AI.
 All models include safe defaults so the frontend never crashes on partial data.
+Expanded to support richer multi-agent outputs.
 """
 
-from typing import Optional
 from pydantic import BaseModel, Field
 
 
@@ -13,6 +13,7 @@ class ResumeIntelligence(BaseModel):
     name: str = "Not detected"
     email: str = "Not detected"
     phone: str = "Not detected"
+    location: str = "Not detected"
     education: list[str] = []
     skills: list[str] = []
     projects: list[str] = []
@@ -26,9 +27,9 @@ class ResumeIntelligence(BaseModel):
 
 class CareerDirection(BaseModel):
     primary: str = "Software Engineer"
-    secondary: str = "Not detected"
+    secondary: str = "Not strongly evident"
     confidence: int = Field(default=50, ge=0, le=100)
-    reasoning: str = "Insufficient data for confident direction detection."
+    reasoning: str = ""
 
 
 # ── Focus Score ───────────────────────────────────────────────────────────────
@@ -38,8 +39,8 @@ class FocusScore(BaseModel):
     category: str = "Mixed"
     skill_alignment: int = Field(default=50, ge=0, le=100)
     project_alignment: int = Field(default=50, ge=0, le=100)
-    certification_alignment: int = Field(default=50, ge=0, le=100)
-    experience_alignment: int = Field(default=50, ge=0, le=100)
+    certification_alignment: int = Field(default=75, ge=0, le=100)
+    experience_alignment: int = Field(default=60, ge=0, le=100)
     resume_consistency: int = Field(default=50, ge=0, le=100)
     strengths: list[str] = []
     weaknesses: list[str] = []
@@ -79,11 +80,20 @@ class MissingSkill(BaseModel):
     skill: str = ""
     why_it_matters: str = ""
     priority: str = "Medium"
+    learning_resource: str = ""
+
+
+class PartialSkill(BaseModel):
+    skill: str = ""
+    current_level: str = ""
+    needed_level: str = ""
 
 
 class SkillGap(BaseModel):
     role: str = ""
+    current_skill_assessment: str = ""
     missing_skills: list[MissingSkill] = []
+    partially_present_skills: list[PartialSkill] = []
 
 
 # ── Growth Roadmap ────────────────────────────────────────────────────────────
@@ -92,22 +102,26 @@ class RoadmapStep(BaseModel):
     action: str = ""
     details: str = ""
     outcome: str = ""
+    time_commitment: str = ""
 
 
 class GrowthRoadmap(BaseModel):
     day_30: list[RoadmapStep] = []
     day_60: list[RoadmapStep] = []
     day_90: list[RoadmapStep] = []
+    milestone_summary: str = ""
 
 
 # ── Certification Advisor ─────────────────────────────────────────────────────
 
 class Certification(BaseModel):
     name: str = ""
+    provider: str = ""
     level: str = "Beginner"
     why_recommended: str = ""
     expected_benefit: str = ""
-    provider: str = ""
+    approximate_cost: str = ""
+    url: str = ""
 
 
 # ── Project Recommendations ───────────────────────────────────────────────────
@@ -115,15 +129,18 @@ class Certification(BaseModel):
 class ProjectRecommendation(BaseModel):
     name: str = ""
     difficulty: str = "Intermediate"
+    description: str = ""
+    tech_stack: list[str] = []
     skills_learned: list[str] = []
     why_it_helps: str = ""
-    description: str = ""
+    github_starter: str = ""
 
 
 # ── Opportunity Guide ─────────────────────────────────────────────────────────
 
 class Opportunity(BaseModel):
     platform: str = ""
+    type: str = ""
     target_audience: str = ""
     why_useful: str = ""
     url: str = ""
@@ -141,6 +158,7 @@ class AnalysisResponse(BaseModel):
     certifications: list[Certification] = []
     projects: list[ProjectRecommendation] = []
     opportunities: list[Opportunity] = []
+    agent_timings: dict = Field(default_factory=dict)
 
 
 # ── Error Response ────────────────────────────────────────────────────────────

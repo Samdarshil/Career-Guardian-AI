@@ -1,96 +1,76 @@
 """
-Analysis Service — orchestrates PDF extraction, Gemini analysis,
-Pydantic validation, and fallback generation.
+Analysis Service — orchestrates the full pipeline via the OrchestratorAgent.
+Replaces the old single-prompt gemini_service call with multi-agent execution.
+Handles PDF extraction, security checks, and pipeline delegation.
 """
 
+import logging
 from fastapi import UploadFile, HTTPException
 
-from services.pdf_service import extract_text_from_pdf, NoPDFTextError
-from services.gemini_service import analyse_resume
-from models.schemas import (
-    AnalysisResponse,
-    FocusScore,
-    get_focus_category,
+from backend.services.pdf_service import extract_text_from_pdf, NoPDFTextError
+from backend.utils.security import (
+    sanitise_resume_text,
+    deep_validate_pdf,
+    write_audit_log,
+    hash_ip,
 )
+from backend.agents.orchestrator import orchestrator
+from backend.models.schemas import AnalysisResponse
+
+logger = logging.getLogger("career_guardian.analysis_service")
 
 
-def _coerce_focus_score(data: dict) -> dict:
-    """
-    Recalculate focus score from sub-components to ensure mathematical consistency.
-    Gemini sometimes returns a score that doesn't match the weighted formula.
-    """
-    fs = data.get("focus_score", {})
-    if not fs:
-        return data
-
-    sa = fs.get("skill_alignment", 50)
-    pa = fs.get("project_alignment", 50)
-    ca = fs.get("certification_alignment", 50)
-    ea = fs.get("experience_alignment", 50)
-    rc = fs.get("resume_consistency", 50)
-
-    calculated = round(sa * 0.40 + pa * 0.25 + ca * 0.15 + ea * 0.10 + rc * 0.10)
-    fs["score"] = calculated
-    fs["category"] = get_focus_category(calculated)
-    data["focus_score"] = fs
-    return data
-
-
-def _ensure_defaults(data: dict) -> dict:
-    """
-    Fill in safe fallback values for any missing top-level keys
-    so Pydantic validation always succeeds.
-    """
-    defaults = {
-        "resume_intelligence": {},
-        "career_direction": {},
-        "focus_score": {},
-        "resume_rating": {},
-        "skill_gap": {},
-        "growth_roadmap": {},
-        "certifications": [],
-        "projects": [],
-        "opportunities": [],
-    }
-    for key, default in defaults.items():
-        if key not in data or data[key] is None:
-            data[key] = default
-    return data
-
-
-async def run_full_analysis(file: UploadFile) -> AnalysisResponse:
+async def run_full_analysis(
+    file: UploadFile,
+    client_ip: str = "unknown",
+) -> AnalysisResponse:
     """
     Full analysis pipeline:
-      1. Extract text from PDF
-      2. Call Gemini for AI analysis
-      3. Validate and coerce the result
-      4. Return a typed AnalysisResponse
-
-    All errors bubble up as HTTPExceptions with structured detail dicts.
+      1. Deep PDF validation
+      2. Text extraction (PyMuPDF)
+      3. Prompt injection sanitisation
+      4. Multi-agent orchestration
+      5. Audit logging
     """
-    # Step 1: PDF extraction
+    # ── Step 1: Read raw bytes for deep validation ────────────────────────────
+    raw_bytes = await file.read()
+    await file.seek(0)   # rewind so pdf_service can read again
+
+    pdf_error = deep_validate_pdf(raw_bytes)
+    if pdf_error:
+        raise HTTPException(
+            status_code=400,
+            detail={"error": "invalid_file", "message": pdf_error},
+        )
+
+    # ── Step 2: Extract text ──────────────────────────────────────────────────
     try:
         resume_text = await extract_text_from_pdf(file)
     except NoPDFTextError as e:
         raise HTTPException(
             status_code=400,
-            detail={
-                "error": "no_text",
-                "message": str(e),
-            },
+            detail={"error": "no_text", "message": str(e)},
         )
 
-    # Step 2: AI analysis (raises HTTPException on failure)
-    raw_data = await analyse_resume(resume_text)
+    # ── Step 3: Sanitise for prompt injection ─────────────────────────────────
+    sanitised = sanitise_resume_text(resume_text)
+    if sanitised.was_modified:
+        logger.warning(
+            "Resume text sanitised. Blocked patterns: %s",
+            sanitised.blocked_patterns,
+        )
 
-    # Step 3: Coerce and validate
-    raw_data = _ensure_defaults(raw_data)
-    raw_data = _coerce_focus_score(raw_data)
+    # ── Step 4: Multi-agent analysis ──────────────────────────────────────────
+    result = await orchestrator.run(sanitised.text)
 
-    try:
-        result = AnalysisResponse.model_validate(raw_data)
-    except Exception:
-        # Pydantic failed — still try to return partial results with defaults
-        result = AnalysisResponse()
+    # ── Step 5: Audit log ─────────────────────────────────────────────────────
+    write_audit_log(
+        ip_hash=hash_ip(client_ip),
+        filename=file.filename or "unknown.pdf",
+        file_size_bytes=len(raw_bytes),
+        injection_patterns=sanitised.blocked_patterns,
+        agent_timings=result.agent_timings,
+        success=True,
+    )
 
     return result

@@ -1,429 +1,343 @@
-# 🎯 Career Guardian AI
-
 <div align="center">
 
-![Career Guardian AI Banner](https://img.shields.io/badge/Career%20Guardian-AI%20Powered-6C63FF?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+)
+# 🎯 Career Guardian AI
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+### *AI-Powered Career Intelligence — Multi-Agent Resume Analysis*
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-career--guardian--ai.onrender.com-6C63FF?style=for-the-badge&logo=render&logoColor=white)](https://career-guardian-ai.onrender.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Gemini](https://img.shields.io/badge/Google%20Gemini-1.5%20Flash-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev)
+[![Agents](https://img.shields.io/badge/Agents-5%20Specialist-6C63FF?style=flat-square)](#multi-agent-architecture)
+[![Security](https://img.shields.io/badge/Security-4%20Layers-green?style=flat-square)](#security-features)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
-**AI-Powered Career Intelligence Agent**
-*Resume Analysis · Career Direction Discovery · Skill Gap Detection · Professional Growth Planning*
+> Upload your resume. Five specialist AI agents analyse it in parallel and sequence — delivering career direction, focus scoring, skill gap analysis, and a 90-day growth plan in under 20 seconds.
 
-[Features](#-features) · [Demo](#-demo) · [Installation](#-installation) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
+**[🚀 Try Live Demo](https://career-guardian-ai.onrender.com)** · **[📖 API Docs](https://career-guardian-ai.onrender.com/docs)** · **[🤖 View Agents](https://career-guardian-ai.onrender.com/api/agents)**
 
 </div>
 
 ---
 
-## 🧭 What is Career Guardian AI?
+## 🧭 The Problem
 
-Career Guardian AI is **not** a job recommender. It is **not** a generic ATS checker.
+Most resume tools ask: *"Will an ATS pass this?"*
 
-It is an **AI Career Mentor** that helps students and professionals answer the questions most tools ignore:
+Career Guardian AI asks: *"Is this resume sending the right signal about who you are and where you're headed?"*
 
-| Question | What Career Guardian Answers |
-|---|---|
-| *"Is my resume focused?"* | Focus Score — the flagship feature |
-| *"What career am I actually suited for?"* | Career Direction Detection |
-| *"What am I missing to get there?"* | Skill Gap Analysis |
-| *"What should I build next?"* | Project Recommendation Engine |
-| *"How do I grow over the next 90 days?"* | Personalised Growth Roadmap |
-| *"Which certifications actually matter?"* | Certification Advisor |
-| *"Where should I look for opportunities?"* | Opportunity Guide |
-
-> **Core insight:** Many students build resumes targeting 4–5 career paths at once (AIML + Frontend + Backend + Cloud + Android). This confuses recruiters and weakens positioning. Career Guardian AI detects this and guides users toward clarity.
+**The core insight:** Students building resumes often target 4–5 career paths simultaneously — AIML + Frontend + Backend + Cloud + Android. This confuses recruiters and weakens positioning. Career Guardian AI detects this problem and guides users toward career clarity.
 
 ---
 
-## ✨ Features
+## 🏗️ Multi-Agent Architecture
 
-### 🔮 Focus Score *(Flagship Feature)*
-The centrepiece of the platform. A weighted composite score that measures how well a resume is aligned to a single career direction.
-
-```
-Focus Score = Skill Alignment (40%)
-            + Project Alignment (25%)
-            + Certification Alignment (15%)
-            + Experience Alignment (10%)
-            + Resume Consistency (10%)
-```
-
-| Score Range | Category |
-|---|---|
-| 90 – 100 | ✅ Highly Focused |
-| 70 – 89 | 🟡 Mostly Focused |
-| 50 – 69 | 🟠 Mixed |
-| 0 – 49 | 🔴 Unfocused |
-
-### 🧠 Career Direction Analyzer
-Detects primary and secondary career directions with a confidence score and detailed reasoning.
-
-### 📊 Resume Rating
-Overall score (0–100) with six subscores: Skills, Projects, Certifications, Experience, Presentation, and Focus.
-
-### 🔍 Skill Gap Analysis
-Based on detected primary role. Every missing skill includes a priority level (High / Medium / Low) and an explanation of why it matters.
-
-### 🗺️ Personalised Growth Roadmap
-30-day, 60-day, and 90-day action plans with specific tasks, how-to details, and expected outcomes.
-
-### 📜 Certification Advisor
-Real certifications only (no made-up ones), categorised as Beginner / Intermediate / Advanced, with reasoning specific to the user's resume.
-
-### 🛠️ Project Recommendation Engine
-Portfolio projects aligned with detected career direction, with difficulty levels and skills learned.
-
-### 🌐 Opportunity Guide
-Curated list of platforms to find opportunities — with context on why each one fits this specific person.
-
-### 📄 Resume Intelligence Extraction
-Structured extraction of name, email, education, skills, projects, experience, certifications, achievements, and a generated summary.
-
----
-
-## 🖼️ Screenshots
-
-> *Screenshots will be added after first deployment.*
-
-| Upload Screen | Focus Score Dashboard |
-|---|---|
-| `[Screenshot Placeholder]` | `[Screenshot Placeholder]` |
-
-| Skill Gap Analysis | Growth Roadmap |
-|---|---|
-| `[Screenshot Placeholder]` | `[Screenshot Placeholder]` |
-
----
-
-## 🏗️ Architecture
-
-### Data Flow
+Five specialist agents coordinate through a shared context object. Each agent receives the outputs of all prior agents, enabling true context chaining — not just parallel API calls.
 
 ```mermaid
 flowchart TD
-    A[👤 User uploads PDF] --> B[FastAPI POST /api/analyze]
-    B --> C[pdf_service.py\nPyMuPDF extraction]
-    C -->|No text found| D[❌ NoPDFTextError]
-    C -->|Text extracted| E[gemini_service.py\nBuild structured prompt]
-    E --> F[Google Gemini 1.5 Flash API]
-    F -->|Timeout / Error| G[Exponential backoff\nmax 2 retries]
-    G -->|All retries failed| H[❌ 503 / 504 error]
-    F -->|Raw JSON response| I[utils/helpers.py\nStrip markdown fences\nParse JSON]
-    I --> J[analysis_service.py\nCoerce focus score\nFill defaults]
-    J --> K[models/schemas.py\nPydantic validation]
-    K --> L[✅ AnalysisResponse JSON]
-    L --> M[Frontend Dashboard\n9 sections rendered]
+    U[👤 User uploads PDF] --> SEC[🔒 Security Layer\nDeep validation · Injection sanitiser · Rate limiter]
+    SEC --> PDF[📄 pdf_service.py\nPyMuPDF text extraction]
+    PDF --> ORC[🎯 Orchestrator\nbackend/agents/orchestrator.py]
+
+    subgraph PHASE_A [Phase A — Parallel]
+        ORC -->|resume text| RA[Resume Agent\nExtracts structured intel]
+        ORC -->|resume text| CA[Career Agent\nDirection + Focus Score]
+    end
+
+    subgraph PHASE_B [Phase B — Sequential chain]
+        RA & CA -->|context| SGA[Skill Gap Agent\nRole-specific gap analysis]
+        SGA -->|context| RMA[Roadmap Agent\n30/60/90 day plan]
+        RMA -->|context| RSA[Resource Agent\nCerts · Projects · Platforms]
+    end
+
+    RSA --> AGG[Aggregator\nMerge · Pydantic validate]
+    AGG -->|SSE stream| FE[🖥️ Frontend Dashboard\nLive agent feed + 9-section report]
 ```
 
-### Service Architecture
+### Agent Responsibilities
 
-```mermaid
-graph LR
-    subgraph Frontend
-        HTML[index.html]
-        CSS[style.css]
-        JS[script.js]
-    end
+| Agent | Phase | Input | Output | File |
+|-------|-------|-------|--------|------|
+| **Resume Agent** | A (parallel) | Raw resume text | Structured extraction: skills, projects, education, experience | `agents/resume_agent.py` |
+| **Career Agent** | A (parallel) | Raw text + Resume Agent output | Career direction, confidence score, **Focus Score** (flagship) | `agents/career_agent.py` |
+| **Skill Gap Agent** | B (sequential) | Resume + Career outputs | Missing skills with priority (High/Med/Low) and learning resources | `agents/skill_gap_agent.py` |
+| **Roadmap Agent** | B (sequential) | All prior outputs | 30/60/90-day action plan addressing identified gaps | `agents/roadmap_agent.py` |
+| **Resource Agent** | B (sequential) | All prior outputs | Certifications, portfolio projects, opportunity platforms | `agents/resource_agent.py` |
 
-    subgraph API Layer
-        ROUTE[routes/analysis.py\nThin route]
-    end
+### ADK Compatibility
 
-    subgraph Services
-        PDF[pdf_service.py]
-        GEMINI[gemini_service.py]
-        ANALYSIS[analysis_service.py]
-    end
+All agents inherit from `BaseAgent` which mirrors the [Google ADK](https://google.github.io/adk-docs/) interface:
 
-    subgraph Models
-        SCHEMA[models/schemas.py\nPydantic]
-        HELPERS[utils/helpers.py]
-    end
+```python
+class BaseAgent:
+    name: str          # ADK-required
+    description: str   # ADK-required
 
-    subgraph External
-        GAPI[Google Gemini API]
-    end
+    async def run(self, context: AgentContext) -> AgentResult:
+        ...            # ADK-compatible entry point
+```
 
-    JS -->|POST multipart/form-data| ROUTE
-    ROUTE --> ANALYSIS
-    ANALYSIS --> PDF
-    ANALYSIS --> GEMINI
-    GEMINI --> GAPI
-    GEMINI --> HELPERS
-    ANALYSIS --> SCHEMA
-    SCHEMA -->|Validated JSON| ROUTE
-    ROUTE -->|JSON response| JS
+Agents can be dropped into an ADK runner without modification by replacing the `Orchestrator` with `google.adk.Runner`.
+
+---
+
+## ⭐ Focus Score — Flagship Feature
+
+The centrepiece of Career Guardian AI. A weighted composite score measuring how well a resume is aligned to a single career direction.
+
+```
+Focus Score = Skill Alignment    × 40%
+            + Project Alignment  × 25%
+            + Cert Alignment     × 15%
+            + Exp Alignment      × 10%
+            + Consistency        × 10%
+```
+
+| Score | Category | Meaning |
+|-------|----------|---------|
+| 90–100 | ✅ Highly Focused | Resume tells one clear story |
+| 70–89 | 🟡 Mostly Focused | Minor scattered signals |
+| 50–69 | 🟠 Mixed | Targeting 2–3 directions |
+| 0–49 | 🔴 Unfocused | Resume confuses recruiters |
+
+---
+
+## ✨ All Features
+
+| # | Feature | Agent | Description |
+|---|---------|-------|-------------|
+| 1 | **Resume Intelligence** | Resume Agent | Structured extraction of all resume sections |
+| 2 | **Career Direction** | Career Agent | Primary + secondary role with confidence % |
+| 3 | **Focus Score** ⭐ | Career Agent | Weighted 5-dimension focus analysis |
+| 4 | **Resume Rating** | Career Agent | Overall score + 6 subscores with explanations |
+| 5 | **Skill Gap Analysis** | Skill Gap Agent | Missing skills by priority + learning resources |
+| 6 | **Growth Roadmap** | Roadmap Agent | 30/60/90-day personalised action plan |
+| 7 | **Certification Advisor** | Resource Agent | Real certs only, with cost and URLs |
+| 8 | **Project Recommendations** | Resource Agent | Portfolio projects targeting detected gaps |
+| 9 | **Opportunity Guide** | Resource Agent | Curated platforms with direct links |
+
+---
+
+## 🔒 Security Features
+
+Production-grade security across four layers:
+
+### 1 — Prompt Injection Sanitiser
+Detects and neutralises adversarial patterns embedded in PDF text ("resume poisoning").
+```
+Patterns blocked: ignore previous instructions · you are now · act as · DAN ·
+                  jailbreak · new instructions · system prompt · XML tags · chat tokens
+```
+File: `backend/utils/security.py` → `sanitise_resume_text()`
+
+### 2 — Rate Limiter
+Token-bucket implementation, keyed by hashed IP. 10 requests/hour per IP. Zero external dependencies.
+
+File: `backend/utils/security.py` → `RateLimiter`
+
+### 3 — Deep PDF Validation
+Beyond magic bytes — validates cross-reference table, page objects, blocks embedded JavaScript and PE executables.
+
+File: `backend/utils/security.py` → `deep_validate_pdf()`
+
+### 4 — Audit Logger
+JSON-line structured logging. Records IP hash, file metadata, injection attempts, and agent timings. **No resume content ever stored.**
+
+File: `backend/utils/security.py` → `write_audit_log()`
+
+---
+
+## 🚀 Live Demo & Deployment
+
+**Live URL:** [https://career-guardian-ai.onrender.com](https://career-guardian-ai.onrender.com)
+
+Deployed on [Render.com](https://render.com) free tier via `render.yaml`.
+
+```yaml
+# render.yaml (committed to repo root)
+services:
+  - type: web
+    name: career-guardian-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+```
+
+### Deploy your own fork in 3 steps:
+1. Fork this repo
+2. Connect to [render.com](https://render.com) → New Web Service → select repo
+3. Add `GEMINI_API_KEY` in Render environment variables → Deploy
+
+---
+
+## 📡 API Reference
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/analyze` | Full analysis, returns complete JSON |
+| `POST` | `/api/stream` | **SSE stream** — live per-agent events + final result |
+| `GET` | `/api/agents` | Metadata for all 5 registered agents |
+| `GET` | `/health` | Liveness check + agent list |
+| `GET` | `/docs` | Interactive Swagger UI |
+
+### SSE Event Types (`/api/stream`)
+
+```
+event: agent_start  data: {"agent": "resume_agent", "label": "Extracting resume intelligence"}
+event: agent_done   data: {"agent": "resume_agent", "success": true, "duration": 3.2}
+event: complete     data: { ...full AnalysisResponse JSON... }
+event: error        data: {"error": "...", "message": "..."}
 ```
 
 ---
 
-## 🗂️ Folder Structure
+## 🗂️ Project Structure
 
 ```
 Career-Guardian-AI/
 │
 ├── backend/
-│   ├── __init__.py
-│   ├── main.py                   # FastAPI app, CORS, static file serving
+│   ├── main.py                        # FastAPI app, CORS, lifespan hooks
+│   ├── agents/                        # ← Multi-agent system
+│   │   ├── base_agent.py              # ADK-compatible BaseAgent + AgentContext
+│   │   ├── orchestrator.py            # Pipeline coordinator + SSE emitter
+│   │   ├── resume_agent.py            # Structured resume extraction
+│   │   ├── career_agent.py            # Career direction + Focus Score
+│   │   ├── skill_gap_agent.py         # Role-specific gap analysis
+│   │   ├── roadmap_agent.py           # 30/60/90-day growth plan
+│   │   └── resource_agent.py          # Certs, projects, opportunities
 │   ├── routes/
-│   │   ├── __init__.py
-│   │   └── analysis.py           # POST /api/analyze
+│   │   └── analysis.py                # POST /analyze · POST /stream · GET /agents
 │   ├── services/
-│   │   ├── __init__.py
-│   │   ├── pdf_service.py        # PyMuPDF text extraction + validation
-│   │   ├── gemini_service.py     # Gemini API calls + retry logic
-│   │   └── analysis_service.py   # Orchestration + Pydantic coercion
+│   │   ├── pdf_service.py             # PyMuPDF extraction + validation
+│   │   └── analysis_service.py        # Pipeline entry + audit logging
 │   ├── models/
-│   │   ├── __init__.py
-│   │   └── schemas.py            # All Pydantic models + fallback helpers
+│   │   └── schemas.py                 # Pydantic models for all 9 sections
 │   └── utils/
-│       ├── __init__.py
-│       └── helpers.py            # Text sanitisation, JSON parsing, timeout
+│       ├── helpers.py                 # Text sanitiser, JSON parser
+│       └── security.py                # Injection sanitiser, rate limiter, audit log
 │
 ├── frontend/
-│   ├── index.html                # Single-page app shell
-│   ├── style.css                 # Dark theme, responsive grid
-│   └── script.js                 # Upload, API call, dashboard render
+│   ├── index.html                     # SPA with live agent feed UI
+│   ├── style.css                      # Dark theme, responsive, animation
+│   └── script.js                      # SSE client + full dashboard renderer
 │
-├── .env                          # ⚠️ Never commit this
-├── .env.example                  # Safe template — commit this
+├── render.yaml                        # One-file Render.com deployment
+├── .env.example                       # Environment variable template
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🚀 Installation
-
-### Prerequisites
-
-- Python 3.10 or higher
-- A Google Gemini API key → [Get one here](https://aistudio.google.com/app/apikey)
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/Career-Guardian-AI.git
-cd Career-Guardian-AI
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv venv
-
-# macOS / Linux
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure environment variables
-
-```bash
-cp .env.example .env
-```
-
-Open `.env` and add your Gemini API key:
-
-```env
-GEMINI_API_KEY=your_actual_api_key_here
-```
-
-### 5. Run the application
-
-```bash
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-### 6. Open in browser
-
-```
-http://localhost:8000
-```
-
----
-
-## 🔑 Environment Variables
-
-| Variable | Required | Description |
-|---|---|---|
-| `GEMINI_API_KEY` | ✅ Yes | Google Gemini API key from [aistudio.google.com](https://aistudio.google.com/app/apikey) |
-
----
-
-## 🔌 API Reference
-
-### `POST /api/analyze`
-
-Analyse a resume PDF and return full career intelligence.
-
-**Request**
-```
-Content-Type: multipart/form-data
-Field: resume (PDF file, max 10 MB)
-```
-
-**Response (200 OK)**
-```json
-{
-  "resume_intelligence": { ... },
-  "career_direction": {
-    "primary": "AIML Engineer",
-    "secondary": "Backend Developer",
-    "confidence": 87,
-    "reasoning": "..."
-  },
-  "focus_score": {
-    "score": 72,
-    "category": "Mostly Focused",
-    "skill_alignment": 80,
-    "project_alignment": 75,
-    ...
-  },
-  "resume_rating": { "overall": 68, "subscores": { ... } },
-  "skill_gap": { "role": "AIML Engineer", "missing_skills": [...] },
-  "growth_roadmap": { "day_30": [...], "day_60": [...], "day_90": [...] },
-  "certifications": [...],
-  "projects": [...],
-  "opportunities": [...]
-}
-```
-
-**Error responses**
-
-| Code | Error Key | When |
-|---|---|---|
-| 400 | `invalid_file` | Non-PDF or file > 10 MB |
-| 400 | `no_text` | Scanned/image-only PDF |
-| 503 | `gemini_quota` | API quota exceeded |
-| 504 | `timeout` | Analysis took > 25 seconds |
-| 500 | `analysis_failed` | Unexpected failure |
-
-### `GET /health`
-
-```json
-{ "status": "ok", "gemini_key_configured": true }
-```
-
----
-
-## 🧪 Test Resumes
-
-Three sample personas for testing expected behaviour:
+## 🧪 Test Personas & Expected Outputs
 
 ### Persona 1 — AIML Focused
 ```
 Skills: Python, TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy, SQL
 Projects: Image Classifier, Sentiment Analysis API, Fraud Detection Model
-Certs: TensorFlow Developer Certificate, Kaggle ML Course
-Experience: ML Intern at startup
+Certs:   TensorFlow Developer Certificate, Kaggle ML Course
+Exp:     ML Intern at startup (3 months)
 ```
-**Expected:** Primary = AIML Engineer · Focus Score ≈ 85 · Category = Mostly Focused
+**Expected:** Primary = AIML Engineer · Confidence ≥ 85% · Focus Score ≥ 78 · Category = Mostly Focused
 
-### Persona 2 — Full Stack
+### Persona 2 — Full Stack Developer
 ```
-Skills: React, Node.js, Express, PostgreSQL, REST APIs, Docker
-Projects: E-commerce platform, Chat app with WebSockets, REST API boilerplate
-Certs: Meta Frontend Developer
-Experience: Full Stack Intern
+Skills: React, TypeScript, Node.js, Express, PostgreSQL, REST APIs, Docker
+Projects: E-commerce platform, Real-time chat app, REST API boilerplate
+Certs:   Meta Frontend Developer Certificate
+Exp:     Full Stack Intern
 ```
-**Expected:** Primary = Full Stack Developer · Focus Score ≈ 78 · Category = Mostly Focused
+**Expected:** Primary = Full Stack Developer · Confidence ≥ 80% · Focus Score ≥ 72 · Category = Mostly Focused
 
-### Persona 3 — Highly Unfocused
+### Persona 3 — Unfocused (Control Case)
 ```
-Skills: Python, React, Docker, TensorFlow, Android (Kotlin), Cybersecurity basics, SQL, ML
-Projects: Android app, ML classifier, React dashboard, penetration testing lab
-Certs: Mix of AWS, Google, Android
-Experience: None
+Skills: Python, React, Docker, TensorFlow, Kotlin (Android), Metasploit, SQL, ML
+Projects: Android app, ML classifier, React dashboard, pentest lab
+Certs:   AWS Cloud Practitioner, Google Android, Kaggle Python
+Exp:     None
 ```
-**Expected:** Primary = Software Engineer (uncertain) · Focus Score ≈ 28 · Category = Unfocused
+**Expected:** Primary = Software Engineer (low confidence) · Focus Score ≤ 32 · Category = Unfocused
 
 ---
 
-## 🛡️ Error Handling Summary
+## 🏁 Kaggle Course Concepts Coverage
 
-| Scenario | Handled By | User Message |
-|---|---|---|
-| Non-PDF upload | `pdf_service.py` | "Only PDF files are accepted (max 10 MB)." |
-| Scanned PDF | `pdf_service.py` | "Upload a text-based PDF. Scanned image PDFs are not supported." |
-| File > 10 MB | `pdf_service.py` | "File exceeds the 10 MB limit." |
-| Gemini quota | `gemini_service.py` | "AI service quota exceeded. Please try again later." |
-| Gemini timeout | `gemini_service.py` | "Analysis timed out after 25 seconds." |
-| Invalid JSON | `helpers.py` | Falls back to safe defaults via Pydantic |
-| Network error | `script.js` | "Network error. Please check your connection." |
-| Request timeout | `script.js` | "Request timed out. Please try again." |
+| Course Concept | Implementation | Location |
+|----------------|----------------|----------|
+| **Multi-Agent System** | 5 specialist agents with shared AgentContext | `backend/agents/` |
+| **Agent Skills** | Each agent is a typed, callable skill with I/O contracts | `backend/agents/base_agent.py` |
+| **ADK Compatible** | `BaseAgent` mirrors Google ADK interface (`name`, `description`, `run()`) | `backend/agents/base_agent.py` |
+| **Security Features** | Prompt injection sanitiser, rate limiter, deep PDF validation, audit log | `backend/utils/security.py` |
+| **Deployability** | `render.yaml` + live URL, zero-config deploy | `render.yaml` |
+| **Streaming (Antigravity)** | SSE agent feed — live per-agent progress in browser | `backend/routes/analysis.py` |
+
+---
+
+## ⚙️ Local Setup
+
+### Prerequisites
+- Python 3.11+
+- Gemini API key → [aistudio.google.com](https://aistudio.google.com/app/apikey)
+
+```bash
+# 1. Clone
+git clone https://github.com/yourusername/Career-Guardian-AI.git
+cd Career-Guardian-AI
+
+# 2. Virtual environment
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Configure environment
+cp .env.example .env
+# Edit .env → add GEMINI_API_KEY=your_key_here
+
+# 5. Run
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+
+# Open: http://localhost:8000
+# API docs: http://localhost:8000/docs
+# Agent list: http://localhost:8000/api/agents
+```
 
 ---
 
 ## 🔮 Future Roadmap
 
-- [ ] **v1.1** — PDF export of the full analysis report
-- [ ] **v1.2** — Resume comparison (before vs. after improvements)
-- [ ] **v1.3** — LinkedIn profile URL analysis (no scraping — user pastes text)
-- [ ] **v1.4** — Multi-language resume support
-- [ ] **v2.0** — Side-by-side role comparison (e.g. AIML vs Data Science)
-- [ ] **v2.1** — Industry-specific focus scoring (startup vs enterprise vs research)
-- [ ] **v2.2** — Weekly growth check-in via email digest
+- [ ] **v2.1** — PDF report export (download full analysis as PDF)
+- [ ] **v2.2** — Resume diff mode (before vs. after improvements)
+- [ ] **v2.3** — Full Google ADK runner integration
+- [ ] **v2.4** — MCP server — expose resume analysis as an MCP tool
+- [ ] **v3.0** — LinkedIn profile text analysis (paste text, no scraping)
+- [ ] **v3.1** — Multi-language resume support (Hindi, Spanish, French)
+- [ ] **v3.2** — Role-specific focus scoring (startup vs. enterprise vs. research)
 
 ---
 
-## 🤔 Why Career Guardian AI?
-
-Most resume tools answer: *"Will an ATS pass this?"*
-
-Career Guardian AI answers: *"Is this resume sending the right signal about who you are and where you're headed?"*
-
-That is a fundamentally different — and more valuable — question for students and early-career professionals who are still figuring out their direction.
-
----
-
-## 👨‍💻 Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
-|---|---|
-| Backend | FastAPI, Python 3.10+ |
+|-------|-----------|
 | AI Engine | Google Gemini 1.5 Flash |
+| Agent Framework | Custom (ADK-compatible BaseAgent) |
+| Backend | FastAPI 0.111 + Python 3.11 |
 | PDF Parsing | PyMuPDF (fitz) |
 | Validation | Pydantic v2 |
+| Streaming | Server-Sent Events (SSE) |
 | Frontend | Vanilla HTML / CSS / JS |
-| Environment | python-dotenv |
-| Server | Uvicorn (ASGI) |
+| Deployment | Render.com (`render.yaml`) |
 
 ---
 
 ## 📄 License
 
-```
-MIT License
-
-Copyright (c) 2024 Career Guardian AI
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 

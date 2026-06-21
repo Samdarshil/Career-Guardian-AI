@@ -8,11 +8,11 @@ import os
 import google.generativeai as genai
 from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
 
-from utils.helpers import sanitise_text, safe_parse_json
+from backend.utils.helpers import sanitise_text, safe_parse_json
 
 MAX_RETRIES = 2
 BASE_DELAY = 2.0  # seconds — doubles each retry: 2s, 4s
-GENERATION_TIMEOUT = 60.0  # seconds
+GENERATION_TIMEOUT = 20.0  # seconds
 
 
 def _configure_gemini() -> genai.GenerativeModel:
@@ -21,7 +21,7 @@ def _configure_gemini() -> genai.GenerativeModel:
         raise RuntimeError("GEMINI_API_KEY is not set in environment variables.")
     genai.configure(api_key=api_key)
     return genai.GenerativeModel(
-        model_name="gemini-2.5-flash-lite",
+        model_name="gemini-1.5-flash",
         system_instruction=(
             "You are an expert Career Mentor AI with 15 years of experience in talent "
             "acquisition, career coaching, and technical recruitment. "
@@ -217,14 +217,10 @@ async def analyse_resume(resume_text: str) -> dict:
             continue
 
         except (ServiceUnavailable, Exception) as e:
-            print("🔥 GEMINI ERROR:", repr(e))
             last_error = e
-
             if attempt < MAX_RETRIES:
                 await asyncio.sleep(BASE_DELAY * (2 ** attempt))
-                continue
-
-    raise
+            continue
 
     # All retries exhausted
     if isinstance(last_error, TimeoutError):

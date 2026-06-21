@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Career Guardian AI — Career Intelligence</title>
-  <meta name="description" content="AI-powered career intelligence: resume analysis, focus scoring, skill gap detection, and professional growth planning." />
+  <meta name="description" content="AI-powered multi-agent career intelligence: resume analysis, focus scoring, skill gap detection, and professional growth planning." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -35,7 +35,9 @@
         </div>
       </div>
       <nav class="header-nav">
-        <span class="nav-tag">Career Intelligence</span>
+        <a href="/docs" target="_blank" rel="noopener" class="nav-link">API Docs</a>
+        <a href="/api/agents" target="_blank" rel="noopener" class="nav-link">Agents</a>
+        <span class="nav-tag">Multi-Agent · Gemini 1.5 Flash</span>
       </nav>
     </div>
   </header>
@@ -43,9 +45,36 @@
   <!-- ── UPLOAD PANEL ── -->
   <main id="upload-section" class="upload-section">
     <div class="upload-hero">
-      <div class="hero-eyebrow">AI Career Mentor</div>
+      <div class="hero-eyebrow">5-Agent AI Pipeline</div>
       <h1 class="hero-title">Understand your career<br/><span class="hero-accent">at a glance</span></h1>
-      <p class="hero-sub">Upload your resume and get a deep analysis — career direction, focus score, skill gaps, growth roadmap, and more. No account needed.</p>
+      <p class="hero-sub">Five specialist AI agents analyse your resume in sequence — extracting intelligence, detecting your career direction, scoring your focus, mapping skill gaps, and building your 90-day growth plan.</p>
+    </div>
+
+    <div class="agent-pipeline-preview" aria-hidden="true">
+      <div class="pipeline-agent">
+        <div class="pa-dot"></div>
+        <span>Resume Agent</span>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-agent">
+        <div class="pa-dot"></div>
+        <span>Career Agent</span>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-agent">
+        <div class="pa-dot"></div>
+        <span>Skill Gap Agent</span>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-agent">
+        <div class="pa-dot"></div>
+        <span>Roadmap Agent</span>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-agent">
+        <div class="pa-dot"></div>
+        <span>Resource Agent</span>
+      </div>
     </div>
 
     <div class="upload-card" id="drop-zone" role="button" tabindex="0" aria-label="Upload resume PDF">
@@ -76,7 +105,7 @@
     </div>
 
     <button class="btn-analyse" id="analyse-btn" disabled aria-label="Analyse resume">
-      <span class="btn-label">Analyse My Resume</span>
+      <span class="btn-label">Launch Agent Pipeline</span>
       <span class="btn-arrow">→</span>
     </button>
 
@@ -86,23 +115,61 @@
     </div>
   </main>
 
-  <!-- ── LOADING STATE ── -->
-  <div id="loading-section" class="loading-section hidden" role="status" aria-label="Analysing resume">
+  <!-- ── AGENT STREAM LOADING STATE ── -->
+  <div id="loading-section" class="loading-section hidden" role="status" aria-label="Agents running">
     <div class="loading-card">
       <div class="loading-orbit" aria-hidden="true">
         <div class="orbit-ring ring-1"></div>
         <div class="orbit-ring ring-2"></div>
         <div class="orbit-dot"></div>
       </div>
-      <h2 class="loading-title">Analysing your resume</h2>
-      <div class="loading-steps" id="loading-steps">
-        <div class="loading-step active" data-step="0">Extracting resume content</div>
-        <div class="loading-step" data-step="1">Detecting career direction</div>
-        <div class="loading-step" data-step="2">Calculating focus score</div>
-        <div class="loading-step" data-step="3">Mapping skill gaps</div>
-        <div class="loading-step" data-step="4">Building growth roadmap</div>
+      <h2 class="loading-title">Agent pipeline running</h2>
+
+      <!-- Live agent feed — updated via SSE -->
+      <div class="agent-feed" id="agent-feed" aria-live="polite">
+        <div class="agent-feed-row" id="feed-resume_agent">
+          <div class="feed-status idle" id="status-resume_agent"></div>
+          <div class="feed-info">
+            <span class="feed-name">Resume Agent</span>
+            <span class="feed-label" id="label-resume_agent">Waiting…</span>
+          </div>
+          <span class="feed-time" id="time-resume_agent"></span>
+        </div>
+        <div class="agent-feed-row" id="feed-career_agent">
+          <div class="feed-status idle" id="status-career_agent"></div>
+          <div class="feed-info">
+            <span class="feed-name">Career Agent</span>
+            <span class="feed-label" id="label-career_agent">Waiting…</span>
+          </div>
+          <span class="feed-time" id="time-career_agent"></span>
+        </div>
+        <div class="agent-feed-row" id="feed-skill_gap_agent">
+          <div class="feed-status idle" id="status-skill_gap_agent"></div>
+          <div class="feed-info">
+            <span class="feed-name">Skill Gap Agent</span>
+            <span class="feed-label" id="label-skill_gap_agent">Waiting…</span>
+          </div>
+          <span class="feed-time" id="time-skill_gap_agent"></span>
+        </div>
+        <div class="agent-feed-row" id="feed-roadmap_agent">
+          <div class="feed-status idle" id="status-roadmap_agent"></div>
+          <div class="feed-info">
+            <span class="feed-name">Roadmap Agent</span>
+            <span class="feed-label" id="label-roadmap_agent">Waiting…</span>
+          </div>
+          <span class="feed-time" id="time-roadmap_agent"></span>
+        </div>
+        <div class="agent-feed-row" id="feed-resource_agent">
+          <div class="feed-status idle" id="status-resource_agent"></div>
+          <div class="feed-info">
+            <span class="feed-name">Resource Agent</span>
+            <span class="feed-label" id="label-resource_agent">Waiting…</span>
+          </div>
+          <span class="feed-time" id="time-resource_agent"></span>
+        </div>
       </div>
-      <div class="loading-timer">This usually takes 10–20 seconds</div>
+
+      <div class="loading-timer" id="loading-timer">Connecting to agent pipeline…</div>
     </div>
   </div>
 
@@ -116,59 +183,50 @@
           <h2 class="dash-title">Career Intelligence Report</h2>
           <p class="dash-subtitle" id="dash-candidate-name">—</p>
         </div>
-        <button class="btn-reanalyse" id="reanalyse-btn">← Analyse another resume</button>
+        <div class="dash-header-right">
+          <div class="agent-timing-pills" id="agent-timing-pills"></div>
+          <button class="btn-reanalyse" id="reanalyse-btn">← New analysis</button>
+        </div>
       </div>
     </div>
 
     <div class="dashboard">
 
-      <!-- ── ROW 1: FLAGSHIP — Focus Score (full width) ── -->
+      <!-- ── FOCUS SCORE HERO ── -->
       <section class="focus-hero-section" aria-label="Focus Score">
         <div class="focus-hero-card">
           <div class="focus-hero-left">
-            <div class="section-eyebrow">Flagship Feature</div>
+            <div class="section-eyebrow">Flagship Feature · Career Agent</div>
             <h3 class="focus-hero-title">Resume Focus Score</h3>
             <p class="focus-hero-desc" id="focus-reasoning"></p>
-
             <div class="focus-breakdown">
               <div class="breakdown-item">
                 <span class="breakdown-label">Skill alignment</span>
-                <div class="breakdown-bar-wrap">
-                  <div class="breakdown-bar" id="bar-skill-align"></div>
-                </div>
+                <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-skill-align"></div></div>
                 <span class="breakdown-val" id="val-skill-align">—</span>
               </div>
               <div class="breakdown-item">
                 <span class="breakdown-label">Project alignment</span>
-                <div class="breakdown-bar-wrap">
-                  <div class="breakdown-bar" id="bar-project-align"></div>
-                </div>
+                <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-project-align"></div></div>
                 <span class="breakdown-val" id="val-project-align">—</span>
               </div>
               <div class="breakdown-item">
                 <span class="breakdown-label">Cert alignment</span>
-                <div class="breakdown-bar-wrap">
-                  <div class="breakdown-bar" id="bar-cert-align"></div>
-                </div>
+                <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-cert-align"></div></div>
                 <span class="breakdown-val" id="val-cert-align">—</span>
               </div>
               <div class="breakdown-item">
                 <span class="breakdown-label">Experience alignment</span>
-                <div class="breakdown-bar-wrap">
-                  <div class="breakdown-bar" id="bar-exp-align"></div>
-                </div>
+                <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-exp-align"></div></div>
                 <span class="breakdown-val" id="val-exp-align">—</span>
               </div>
               <div class="breakdown-item">
                 <span class="breakdown-label">Resume consistency</span>
-                <div class="breakdown-bar-wrap">
-                  <div class="breakdown-bar" id="bar-consistency"></div>
-                </div>
+                <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-consistency"></div></div>
                 <span class="breakdown-val" id="val-consistency">—</span>
               </div>
             </div>
           </div>
-
           <div class="focus-hero-right">
             <div class="focus-dial-wrap">
               <svg class="focus-dial" viewBox="0 0 200 200" aria-label="Focus score dial">
@@ -181,7 +239,6 @@
                 <text x="100" y="118" text-anchor="middle" class="dial-label" id="dial-category-text">—</text>
               </svg>
             </div>
-
             <div class="focus-sw-grid">
               <div class="focus-sw-col strengths">
                 <div class="sw-header">Strengths</div>
@@ -192,7 +249,6 @@
                 <ul class="sw-list" id="focus-weaknesses"></ul>
               </div>
             </div>
-
             <div class="focus-recs">
               <div class="recs-header">Recommendations</div>
               <ul class="recs-list" id="focus-recs"></ul>
@@ -203,10 +259,8 @@
 
       <!-- ── ROW 2: Career Direction + Resume Rating ── -->
       <div class="grid-2">
-
-        <!-- Career Direction -->
         <section class="card" aria-label="Career Direction">
-          <div class="card-eyebrow">Analysis</div>
+          <div class="card-eyebrow">Career Agent</div>
           <h3 class="card-title">Career Direction</h3>
           <div class="career-direction">
             <div class="career-primary">
@@ -227,9 +281,8 @@
           </div>
         </section>
 
-        <!-- Resume Rating -->
         <section class="card" aria-label="Resume Rating">
-          <div class="card-eyebrow">Evaluation</div>
+          <div class="card-eyebrow">Career Agent</div>
           <h3 class="card-title">Resume Rating</h3>
           <div class="resume-rating">
             <div class="overall-score-row">
@@ -241,24 +294,30 @@
         </section>
       </div>
 
-      <!-- ── ROW 3: Skill Gap (full width) ── -->
+      <!-- ── ROW 3: Skill Gap ── -->
       <section class="card skill-gap-card" aria-label="Skill Gap Analysis">
-        <div class="card-eyebrow">Gap Detection</div>
+        <div class="card-eyebrow">Skill Gap Agent</div>
         <h3 class="card-title">Skill Gap Analysis <span class="card-title-role" id="skill-gap-role"></span></h3>
+        <p class="skill-assessment" id="skill-assessment"></p>
         <div class="skill-gap-grid" id="skill-gap-grid"></div>
+        <div class="partial-skills-section" id="partial-skills-section" style="display:none">
+          <h4 class="partial-title">Skills to deepen</h4>
+          <div class="partial-skills-grid" id="partial-skills-grid"></div>
+        </div>
       </section>
 
       <!-- ── ROW 4: Resume Intelligence ── -->
       <section class="card" aria-label="Resume Intelligence">
-        <div class="card-eyebrow">Extraction</div>
+        <div class="card-eyebrow">Resume Agent</div>
         <h3 class="card-title">Resume Intelligence</h3>
         <div class="intel-grid" id="intel-grid"></div>
       </section>
 
-      <!-- ── ROW 5: Growth Roadmap (full width) ── -->
+      <!-- ── ROW 5: Growth Roadmap ── -->
       <section class="card roadmap-card" aria-label="Growth Roadmap">
-        <div class="card-eyebrow">Planning</div>
+        <div class="card-eyebrow">Roadmap Agent</div>
         <h3 class="card-title">Personalised Growth Roadmap</h3>
+        <p class="milestone-summary" id="milestone-summary"></p>
         <div class="roadmap-phases">
           <div class="roadmap-phase">
             <div class="phase-badge phase-30">30 days</div>
@@ -277,17 +336,13 @@
 
       <!-- ── ROW 6: Certifications + Projects ── -->
       <div class="grid-2">
-
-        <!-- Certifications -->
         <section class="card" aria-label="Certification Advisor">
-          <div class="card-eyebrow">Growth</div>
+          <div class="card-eyebrow">Resource Agent</div>
           <h3 class="card-title">Certification Advisor</h3>
           <div class="cert-list" id="cert-list"></div>
         </section>
-
-        <!-- Projects -->
         <section class="card" aria-label="Project Recommendations">
-          <div class="card-eyebrow">Portfolio</div>
+          <div class="card-eyebrow">Resource Agent</div>
           <h3 class="card-title">Project Recommendations</h3>
           <div class="project-list" id="project-list"></div>
         </section>
@@ -295,7 +350,7 @@
 
       <!-- ── ROW 7: Opportunity Guide ── -->
       <section class="card" aria-label="Opportunity Guide">
-        <div class="card-eyebrow">Discovery</div>
+        <div class="card-eyebrow">Resource Agent</div>
         <h3 class="card-title">Opportunity Guide</h3>
         <div class="opportunity-grid" id="opportunity-grid"></div>
       </section>
@@ -303,12 +358,11 @@
     </div><!-- /dashboard -->
   </div><!-- /results-section -->
 
-  <!-- ── FOOTER ── -->
   <footer class="site-footer">
     <div class="footer-inner">
       <span>Career Guardian AI</span>
       <span class="footer-sep">·</span>
-      <span>Built with Google Gemini</span>
+      <span>5-agent pipeline · Google Gemini 1.5 Flash</span>
       <span class="footer-sep">·</span>
       <span>No data stored · No account required</span>
     </div>
