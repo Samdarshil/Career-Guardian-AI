@@ -11,7 +11,11 @@
 [![Security](https://img.shields.io/badge/Security-4%20Layers-green?style=flat-square)](#security-features)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-> Upload your resume. Five specialist AI agents analyse it in parallel and sequence — delivering career direction, focus scoring, skill gap analysis, and a 90-day growth plan in under 20 seconds.
+> Career Guardian AI is a multi-agent AI system that analyzes resumes, detects career focus, identifies skill gaps, generates personalized growth roadmaps, and recommends certifications, projects, and opportunities.
+
+Instead of acting as another ATS checker, Career Guardian AI answers a more important question:
+
+❓ "Does your resume tell a clear career story?"
 
 </div>
 
