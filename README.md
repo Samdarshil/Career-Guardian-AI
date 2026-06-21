@@ -15,7 +15,7 @@
 
 Instead of acting as another ATS checker, Career Guardian AI answers a more important question:
 
-"Does your resume tell a clear career story"❓ 
+Does your resume tell a clear career story❓ 
 
 </div>
 
