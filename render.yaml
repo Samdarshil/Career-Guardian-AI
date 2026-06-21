@@ -1,0 +1,29 @@
+# Career Guardian AI — Render.com Deployment Configuration
+# Deploy: https://render.com → New Web Service → Connect GitHub repo
+# Set GEMINI_API_KEY in Render dashboard under Environment Variables
+
+services:
+  - type: web
+    name: career-guardian-ai
+    runtime: python
+    region: oregon
+    plan: free
+
+    buildCommand: pip install -r requirements.txt
+
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false          # Set manually in Render dashboard — never commit this
+
+      - key: ALLOWED_ORIGINS
+        value: https://career-guardian-ai.onrender.com
+
+      - key: AUDIT_LOG_PATH
+        value: /tmp/audit.log
+
+      - key: PYTHON_VERSION
+        value: "3.11"
