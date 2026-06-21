@@ -4,6 +4,7 @@
 
 ### *AI-Powered Career Intelligence — Multi-Agent Resume Analysis*
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-career--guardian--ai.onrender.com-6C63FF?style=for-the-badge&logo=render&logoColor=white)](https://career-guardian-ai.onrender.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Gemini](https://img.shields.io/badge/Google%20Gemini-1.5%20Flash-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev)
@@ -11,11 +12,9 @@
 [![Security](https://img.shields.io/badge/Security-4%20Layers-green?style=flat-square)](#security-features)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-> Career Guardian AI is a multi-agent AI system that analyzes resumes, detects career focus, identifies skill gaps, generates personalized growth roadmaps, and recommends certifications, projects, and opportunities.
+> Upload your resume. Five specialist AI agents analyse it in parallel and sequence — delivering career direction, focus scoring, skill gap analysis, and a 90-day growth plan in under 20 seconds.
 
-Instead of acting as another ATS checker, Career Guardian AI answers a more important question:
-
-Does your resume tell a clear career story❓ 
+**[🚀 Try Live Demo](https://career-guardian-ai.onrender.com)** · **[📖 API Docs](https://career-guardian-ai.onrender.com/docs)** · **[🤖 View Agents](https://career-guardian-ai.onrender.com/api/agents)**
 
 </div>
 
@@ -153,7 +152,10 @@ File: `backend/utils/security.py` → `write_audit_log()`
 
 **Live URL:** [https://career-guardian-ai.onrender.com](https://career-guardian-ai.onrender.com)
 
-## render.yaml (committed to repo root)
+Deployed on [Render.com](https://render.com) free tier via `render.yaml`.
+
+```yaml
+# render.yaml (committed to repo root)
 services:
   - type: web
     name: career-guardian-ai
