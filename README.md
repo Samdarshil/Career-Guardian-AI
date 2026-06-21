@@ -1,5 +1,6 @@
 <div align="center">
-# 🎯 Career Guardian AI
+
+    # 🎯 Career Guardian AI
 
 ### *AI-Powered Career Intelligence — Multi-Agent Resume Analysis*
 
@@ -10,9 +11,9 @@
 [![Security](https://img.shields.io/badge/Security-4%20Layers-green?style=flat-square)](#security-features)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-> Most students don't have a resume problem. They have a career direction problem.
+> Career Guardian AI is a multi-agent AI system that analyzes resumes, detects career focus, identifies skill gaps, generates personalized growth roadmaps, and recommends certifications, projects, and opportunities.
 
-Career Guardian AI is a multi-agent AI system that analyzes resumes, detects career focus, identifies skill gaps, generates personalized growth roadmaps, and recommends certifications, projects, and opportunities.
+Most students don't have a resume problem. They have a career direction problem.
 
 Instead of acting as another ATS checker, Career Guardian AI answers a more important question:
 
